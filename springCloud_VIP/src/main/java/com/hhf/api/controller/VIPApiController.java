@@ -35,8 +35,8 @@ public class VIPApiController {
 	@RequestMapping("getUserStr")
 	public String getUserStr() {
 		// VIP--调用User,1.通过httpClient写死。2.通过注册Eureka上的别名(集群负载均衡，使用别名)
-		String resukt = restTemplate.getForObject("http://app-hhf-user/user/getUserStr", String.class);// 1
-		return "VIP--调用User:" + resukt;
+		String result = restTemplate.getForObject("http://app-hhf-user/user/getUserStr", String.class);// 1
+		return "VIP--调用User:" + result;
 	}
 
 	@RequestMapping("getUserData")

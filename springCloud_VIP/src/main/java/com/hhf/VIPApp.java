@@ -19,7 +19,7 @@ public class VIPApp {
 	
 	//需要往springBoot容器中注册restTemplate的bean。
 	@Bean//注入bean
-	@LoadBalanced//能让这个restTemplate实例在请求时拥有客户端负载均衡的能力。
+//	@LoadBalanced//能让这个restTemplate实例在请求时拥有客户端负载均衡的能力。          手写负载均衡，注释掉@LoadBalanced
 	RestTemplate restTemplate(){
 		return new RestTemplate();
 	}
