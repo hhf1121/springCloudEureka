@@ -1,23 +1,17 @@
 package com.hhf.api.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.google.common.collect.Maps;
+import com.hhf.fegin.UserApiFegin;
 
 @RestController
 @RequestMapping("/VIP")
@@ -32,6 +26,9 @@ public class VIPApiController {
 	
 	
 	// 在springCloud中，两种方式调用rest和fegin（springcloud）
+	
+	
+	//1.使用restTemplate调用
 	@RequestMapping("getUserStr")
 	public String getUserStr() {
 		// VIP--调用User,1.通过httpClient写死。2.通过注册Eureka上的别名(集群负载均衡，使用别名)
@@ -64,5 +61,16 @@ public class VIPApiController {
 		map.put("success", true);
 		return map;
 	}
+	
+	
+	//2.使用fegin客户端调用
+	@Autowired
+	private UserApiFegin userApiFegin;
+	
+	@RequestMapping("getUserDataByFegin")
+	public Map<String,Object> getUserDataByFegin(Integer yes) {
+		return userApiFegin.getUserData(yes);
+	}
+		
 
 }
